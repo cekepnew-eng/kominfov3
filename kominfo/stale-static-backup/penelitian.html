@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pusat Riset & Magang — Diskominfo Kota Bogor</title>
+  <meta name="description" content="Dinas Komunikasi dan Informatika Kota Bogor — Portal layanan digital, informasi publik, dan pengaduan masyarakat.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Page specific styles */
+    body::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 600px;
+      background: linear-gradient(180deg, rgba(224, 242, 254, 0.4) 0%, rgba(248, 250, 252, 0) 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .title-oversized {
+      font-size: clamp(1.8rem, 2.8vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #0ea5e9;
+      margin-bottom: 0.75rem;
+    }
+    .title-oversized .text-dark {
+      color: #0f172a;
+    }
+    
+    .subtitle-premium {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--slate-500);
+      font-weight: 400;
+      max-width: 95%;
+      margin-bottom: 12px;
+    }
+
+    .badge-premium {
+      background: #e0f2fe;
+      color: #0284c7;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      display: inline-block;
+    }
+
+    /* Bento Grid Layout */
+    .bento-grid {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .bento-card {
+      background: #ffffff;
+      border: 1px solid #f1f5f9;
+      border-radius: 16px;
+      padding: 1.1rem 0.8rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-5px);
+      border-color: #bae6fd;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .bento-icon-wrapper {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+      transition: all 0.3s ease;
+    }
+
+    .bento-icon-wrapper svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .icon-blue { background: #e0f2fe; color: #0284c7; }
+    .icon-green { background: #dcfce7; color: #16a34a; }
+    .icon-orange { background: #fef3c7; color: #d97706; }
+
+    .bento-title {
+      color: var(--slate-900);
+      font-weight: 800;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+    
+    .bento-desc {
+      color: var(--slate-500);
+      font-size: 0.7rem;
+      line-height: 1.4;
+      margin-bottom: 0;
+    }
+
+
+    /* Premium Image Section */
+    .premium-media-container {
+      position: relative;
+      max-width: 440px;
+      margin: 3.5rem auto 0 auto;
+      filter: drop-shadow(0 15px 30px rgba(124, 58, 237, 0.15));
+    }
+    .premium-img-main {
+      width: 100%; height: auto; object-fit: contain; display: block;
+    }
+
+    .hero-section {
+      padding-top: 135px !important;
+      padding-bottom: 5rem !important;
+    }
+
+    .workflow-step-col {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Workflow Steps Card Styling */
+    .workflow-step {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 2.5rem 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .workflow-step:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(14, 165, 233, 0.08);
+    }
+    .step-icon {
+      width: 80px; height: 80px;
+      background: #f8fafc; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem auto;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      color: var(--accent);
+      position: relative;
+      z-index: 2;
+    }
+    .workflow-connector-line {
+      position: absolute;
+      top: 80px;
+      left: 12.5%;
+      width: 75%;
+      height: 4px;
+      background-image: linear-gradient(to right, #94a3b8 62.5%, rgba(255,255,255,0) 0%);
+      background-size: 8px 4px;
+      background-repeat: repeat-x;
+      z-index: 1;
+      pointer-events: none;
+    }
+    @media (max-width: 991px) {
+      .workflow-connector-line {
+        display: none;
+      }
+    }
+    
+    /* CTA layout */
+    .cta-card {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      border-radius: 24px;
+      padding: 4rem 3rem;
+      text-align: center;
+      color: white;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-card h3 {
+      color: white;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    
+    .cta-card p {
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      opacity: 0.9;
+    }
+    
+    .btn-light {
+      background: #ffffff;
+      color: #0284c7;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    
+    .btn-light:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+      background: #f8fafc;
+    }
+    
+    .cta-decor-1 {
+      position: absolute;
+      border-radius: 50%;
+      background: white;
+      width: 250px; height: 250px; top: -100px; left: -50px; opacity: 0.1;
+      pointer-events: none;
+    }
+    
+    .cta-decor-2 {
+      position: absolute;
+      border-radius: 50%;
+      background: white;
+      width: 350px; height: 350px; bottom: -150px; right: -50px; opacity: 0.1;
+      pointer-events: none;
+    }
+
+    .workflow-step h5 {
+      font-size: 20px !important;
+      color: #334155 !important;
+      margin-bottom: 12px !important;
+    }
+    .workflow-step p {
+      font-size: 14px !important;
+    }
+
+    /* FAQ Accordion Premium Overrides to match reference */
+    .accordion-premium .accordion-item {
+      border-radius: 8px !important;
+      margin-bottom: 16px !important;
+      border: 1px solid rgba(0, 0, 0, 0.05) !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02) !important;
+    }
+    .accordion-premium .accordion-button {
+      position: relative !important;
+      padding: 24px !important;
+      font-weight: 600 !important;
+      color: #0f172a !important;
+      font-size: 16px !important;
+    }
+    .accordion-premium .accordion-button::after {
+      content: "" !important;
+      position: absolute !important;
+      right: 24px !important;
+      top: 50% !important;
+      margin-top: -1px !important;
+      width: 14px !important;
+      height: 2px !important;
+      background-color: #0f172a !important;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      border: none !important;
+      transform: none !important;
+      font-size: unset !important;
+      color: unset !important;
+      font-weight: unset !important;
+      margin: 0 !important;
+      width: 14px !important;
+      height: 2px !important;
+    }
+    .accordion-premium .accordion-button::before {
+      content: "" !important;
+      position: absolute !important;
+      right: 30px !important;
+      top: 50% !important;
+      margin-top: -7px !important;
+      width: 2px !important;
+      height: 14px !important;
+      background-color: #0f172a !important;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease !important;
+    }
+    .accordion-premium .accordion-button:not(.collapsed) {
+      color: #0f172a !important;
+    }
+    .accordion-premium .accordion-button:not(.collapsed)::before {
+      transform: rotate(90deg) !important;
+      opacity: 0 !important;
+    }
+    .accordion-premium .accordion-button:not(.collapsed)::after {
+      transform: rotate(180deg) !important;
+    }
+    .accordion-premium .accordion-body {
+      padding: 24px !important;
+      font-size: 14px !important;
+      color: #64748b !important;
+      line-height: 1.6 !important;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    @media (max-width: 991px) {
+      .premium-media-container { height: auto !important; max-width: 280px !important; margin-top: 2rem; }
+      .bento-grid { flex-direction: column; }
+      .workflow-line { display: none; }
+    }
+
+    .section-gray-bg {
+      background: #f1f5f9 !important;
+    }
+
+    /* Footer Styling Overrides to match Figma Design */
+    .site-footer .row {
+      display: grid !important;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr !important;
+      gap: 40px !important;
+      margin-bottom: 48px !important;
+    }
+
+    .site-footer .row::before,
+    .site-footer .row::after {
+      display: none !important;
+    }
+
+    @media (max-width: 992px) {
+      .site-footer .row {
+        grid-template-columns: 1fr 1fr !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .site-footer .row {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .site-footer .col-lg-4, 
+      .site-footer .col-md-2 {
+        width: auto !important;
+        max-width: none !important;
+        padding: 0 !important;
+      }
+    }
+
+    .site-footer .footer-brand {
+      margin-bottom: 16px !important;
+      gap: 12px !important;
+    }
+
+    .site-footer .footer-brand img {
+      width: 36px !important;
+      height: 36px !important;
+      border-radius: 6px !important;
+    }
+
+    .site-footer .footer-brand strong {
+      font-size: 16px !important;
+      font-weight: 700 !important;
+      color: #ffffff !important;
+    }
+
+    .site-footer .footer-heading {
+      color: #ffffff !important;
+      text-transform: uppercase !important;
+      font-size: 13px !important;
+      letter-spacing: 1px !important;
+      margin-bottom: 20px !important;
+      font-weight: 700 !important;
+    }
+
+    .site-footer .footer-links {
+      gap: 12px !important;
+    }
+
+    .site-footer .footer-links a {
+      font-size: 14px !important;
+    }
+
+    .site-footer .footer-links a:hover {
+      color: #ffffff !important;
+    }
+
+    .site-footer .footer-contact {
+      gap: 16px !important;
+    }
+
+    .site-footer .footer-contact-item {
+      gap: 12px !important;
+      font-size: 14px !important;
+    }
+
+    .site-footer .footer-contact-item svg {
+      color: #ffffff !important;
+      opacity: 0.7 !important;
+      margin-top: 4px !important;
+      width: 16px !important;
+      height: 16px !important;
+    }
+
+    .site-footer .footer-bottom {
+      padding-top: 24px !important;
+      margin-top: 0 !important;
+      font-size: 13px !important;
+      color: #94a3b8 !important;
+    }
+
+    /* Premium Dropdown Animation & Position Bridge */
+    .dropdown-menu {
+      display: block !important;
+      opacity: 0;
+      visibility: hidden;
+      top: 100% !important;
+      margin-top: -5px !important; /* Overlap slightly to close gap */
+      transform: translateY(12px) scale(0.95);
+      transform-origin: top center;
+      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                  visibility 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      pointer-events: none;
+      list-style: none !important;
+      padding-left: 0 !important;
+    }
+
+    /* Invisible hover bridge to prevent menu from closing when mouse is in the gap */
+    .dropdown-menu::before {
+      content: "";
+      position: absolute;
+      top: -25px;
+      left: 0;
+      width: 100%;
+      height: 25px;
+      background: transparent;
+    }
+
+    .dropdown-menu.show {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateY(0) scale(1) !important;
+      pointer-events: auto !important;
+    }
+
+    /* Desktop Navbar Underline Style to match Figma Design */
+    @media (min-width: 992px) {
+      .navbar-nav {
+        height: 72px;
+      }
+
+      .navbar-nav .nav-item {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar-nav .nav-link {
+        height: 100%;
+        padding: 0 1rem !important;
+        display: flex;
+        align-items: center;
+        background-color: transparent !important;
+        border-radius: 0 !important;
+        color: var(--slate-500) !important;
+        transition: color 0.2s ease;
+        position: relative;
+      }
+
+      .navbar-nav .nav-link:hover,
+      .navbar-nav .nav-link.active,
+      .navbar-nav .nav-item.dropdown.open .nav-link {
+        color: #0ea5e9 !important;
+      }
+
+      .navbar-nav .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 18px; /* Tepat di bawah teks link */
+        left: 1rem;
+        right: 1rem;
+        height: 3px;
+        background-color: #0ea5e9;
+        transform: scaleX(0);
+        transform-origin: left center; /* Muncul dari kiri ke kanan */
+        transition: transform 0.25s ease;
+      }
+
+      .navbar-nav .nav-link:hover::after,
+      .navbar-nav .nav-link.active::after,
+      .navbar-nav .nav-item.dropdown.open .nav-link::after {
+        transform: scaleX(1);
+      }
+
+      /* Dropdown arrow positioning & hover animation */
+      .navbar-nav .nav-link svg {
+        margin-right: 6px;
+        margin-left: 0;
+        transition: transform 0.25s ease-out !important;
+      }
+
+      .navbar-nav .nav-link:hover svg {
+        transform: rotate(-90deg) !important; /* Putar ke arah kanan (menunjuk ke teks) saat dihover */
+      }
+
+      .navbar-nav .nav-item.dropdown.open .nav-link svg {
+        transform: rotate(-90deg) !important; /* Putar ke arah kanan saat terbuka */
+      }
+
+      .navbar-nav .nav-item.dropdown.open .nav-link:hover svg {
+        transform: rotate(-90deg) !important;
+      }
+
+      /* Show dropdown menu on hover */
+      .nav-item.dropdown:hover .dropdown-menu {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) scale(1) !important;
+        pointer-events: auto !important;
+      }
+
+      /* Keep parent underline active when dropdown is hovered */
+      .nav-item.dropdown:hover .nav-link::after {
+        transform: scaleX(1) !important;
+      }
+
+      /* Rotate arrow to the right when dropdown is hovered */
+      .nav-item.dropdown:hover .nav-link svg {
+        transform: rotate(-90deg) !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <nav class="navbar" id="siteNav">
+    <div class="navbar-container">
+      
+      <!-- Brand -->
+      <a class="navbar-brand" href="../user/index.php">
+        <img src="images/kominfo.jpg" alt="Logo Kominfo">
+        <div class="brand-divider"></div>
+        <img src="images/logo2.png" alt="Logo 2">
+      </a>
+
+      <!-- Hamburger Toggle -->
+      <button class="navbar-toggler" id="navbarToggler" aria-label="Toggle navigation">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <!-- Menu Items -->
+      <div class="navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="../user/index.php">Beranda</a>
+          </li>
+
+          <li class="nav-item dropdown" id="dropdownProfil">
+            <a class="nav-link" href="#">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              Profil
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../user/visi-misi.php">Visi &amp; Misi Kota Bogor</a></li>
+              <li><a class="dropdown-item" href="../user/sejarah.php">Sejarah</a></li>
+              <li><a class="dropdown-item" href="../user/struktur.php">Struktur</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown" id="dropdownPublikasi">
+            <a class="nav-link" href="#">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              Publikasi
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Galeri</a></li>
+              <li><a class="dropdown-item" href="../user/berita.php">Berita</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown active" id="dropdownLayanan">
+            <a class="nav-link active" href="#">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              Layanan Publik
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item active" href="penelitian.html">Penelitian</a></li>
+              <li><a class="dropdown-item" href="daftar-jurnal.html">Daftar Jurnal</a></li>
+              <li><a class="dropdown-item" href="magang.html">Magang &amp; PKL</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Dokumen</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Kontak</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="../user/komitmen.php">Daftar Komitmen</a>
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+
+  <!-- ═══════════ HERO SECTION ═══════════ -->
+  <section class="section hero-section d-flex align-items-center" style="overflow: hidden;">
+    <div class="container position-relative z-1">
+      <div class="row align-items-center justify-content-between g-4">
+        
+        <!-- Bagian Kiri: Typografi & Bento Grid -->
+        <div class="col-lg-6 pe-lg-5" data-aos="fade-up" data-aos-duration="1000">
+          <div class="mb-4">
+            <span class="badge-premium mb-3">Layanan KOMINFO</span>
+            <h1 class="title-oversized"><span class="text-dark">Pusat</span> Penelitian, Magang <br>& Publikasi Jurnal</h1>
+            <p class="subtitle-premium">
+              Diskominfo Kota Bogor memfasilitasi para mahasiswa, peneliti, dan akademisi untuk melaksanakan berbagai kegiatan akademik. Mulai dari pengajuan izin penelitian, program magang profesional (PKL), hingga pengumpulan berkas jurnal atau karya tulis ilmiah Anda secara terintegrasi.
+            </p>
+            <p class="subtitle-premium">Silakan pilih layanan yang Anda butuhkan di bawah ini.</p>
+          </div>
+
+          <div class="bento-grid">
+            <a href="submit-penelitian.html" class="bento-card">
+              <div class="bento-icon-wrapper icon-blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><circle cx="10" cy="13" r="2"></circle><line x1="11.4" y1="14.4" x2="15" y2="18"></line></svg>
+              </div>
+              <h3 class="bento-title">Penelitian</h3>
+              <p class="bento-desc">Pengajuan Izin Riset & Data</p>
+            </a>
+            
+            <a href="magang.html" class="bento-card">
+              <div class="bento-icon-wrapper icon-green">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+              </div>
+              <h3 class="bento-title">Magang</h3>
+              <p class="bento-desc">Pendaftaran Program PKL</p>
+            </a>
+
+            <a href="daftar-jurnal.html" class="bento-card">
+              <div class="bento-icon-wrapper icon-orange">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path><line x1="12" y1="6" x2="16" y2="6"></line><line x1="12" y1="10" x2="16" y2="10"></line></svg>
+              </div>
+              <h3 class="bento-title">Jurnal</h3>
+              <p class="bento-desc">Publikasi Karya Hasil Akhir</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bagian Kanan: Static Poster -->
+        <div class="col-lg-5 offset-lg-1" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+          <div class="premium-media-container">
+            <img src="images/research_illustration.png" class="premium-img-main" alt="Ilustrasi Penelitian">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ALUR KERJA SECTION ═══════════ -->
+  <section class="section section-gray-bg" style="padding: 6rem 0;">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="fw-bold mb-3">Alur Proses Pelaksanaan</h2>
+        <p class="text-muted">Langkah mudah untuk memulai magang atau riset Anda di Diskominfo Kota Bogor</p>
+      </div>
+      
+      <div class="row position-relative">
+        <!-- Connector line -->
+        <div class="workflow-connector-line" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500"></div>
+        <div class="col-md-3 col-sm-6 mb-4 workflow-step-col" data-aos="fade-up" data-aos-delay="100">
+          <div class="workflow-step">
+            <div class="step-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5c-2.2 0-4 1.8-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+            </div>
+            <h5 class="fw-bold mb-2">1. Registrasi</h5>
+            <p class="small text-muted mb-0">Isi form pengajuan secara online dengan melampirkan berkas dari Universitas/Sekolah.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 workflow-step-col" data-aos="fade-up" data-aos-delay="200">
+          <div class="workflow-step">
+            <div class="step-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h5 class="fw-bold mb-2">2. Verifikasi</h5>
+            <p class="small text-muted mb-0">Tim SDM akan meninjau ketersediaan kuota dan kesesuaian jurusan Anda.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 workflow-step-col" data-aos="fade-up" data-aos-delay="300">
+          <div class="workflow-step">
+            <div class="step-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            </div>
+            <h5 class="fw-bold mb-2">3. Pelaksanaan</h5>
+            <p class="small text-muted mb-0">Melaksanakan magang/penelitian sesuai durasi dan arahan mentor pembimbing.</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4 workflow-step-col" data-aos="fade-up" data-aos-delay="400">
+          <div class="workflow-step">
+            <div class="step-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            </div>
+            <h5 class="fw-bold mb-2">4. Laporan Akhir</h5>
+            <p class="small text-muted mb-0">Mengumpulkan jurnal/laporan akhir ke sistem untuk diarsipkan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FAQ SECTION ═══════════ -->
+  <section class="section position-relative" style="padding: 6rem 0 8rem 0; z-index: 2;">
+    <div class="container position-relative z-1">
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="fw-bold mb-3">Pertanyaan Umum</h2>
+            <p class="text-muted">Informasi yang sering ditanyakan seputar magang dan riset</p>
+          </div>
+
+          <div class="accordion-premium" id="faqAccordion">
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-target="collapseOne">
+                  Berapa lama durasi magang yang diperbolehkan?
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse">
+                <div class="accordion-body">
+                  Durasi pelaksanaan magang dapat disesuaikan dengan kebutuhan kurikulum kampus atau sekolah Anda, dengan jangka waktu umum berkisar antara 1 hingga 3 bulan. Kami juga terbuka untuk perpanjangan waktu magang jika kuota divisi masih tersedia dan disetujui oleh mentor pembimbing.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-target="collapseTwo">
+                  Apakah ada kompensasi finansial (gaji) selama magang?
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse">
+                <div class="accordion-body">
+                  Saat ini, program magang (PKL) di Diskominfo Kota Bogor tidak memberikan kompensasi finansial (gaji). Fokus utama dari program ini adalah memberikan pengalaman kerja nyata secara profesional di lingkungan pemerintahan daerah, bimbingan proyek digital, serta pemenuhan kebutuhan nilai akademik akademis Anda.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-target="collapseThree">
+                  Bagaimana cara mengetahui pengajuan saya diterima?
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse">
+                <div class="accordion-body">
+                  Pengumuman dan status pengajuan magang atau riset Anda akan dikirimkan secara resmi melalui email yang telah Anda daftarkan di pendaftaran online. Proses verifikasi berkas oleh Tim SDM biasanya memakan waktu maksimal 7 hari kerja setelah semua dokumen lengkap kami terima.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CTA SECTION ═══════════ -->
+  <section class="section" style="padding-bottom: 10rem;">
+    <div class="container">
+      <div class="cta-card" data-aos="fade-up" data-aos-duration="1000">
+        <div class="position-relative z-1">
+          <h3 class="fw-bold mb-3">Siap Memulai Kolaborasi?</h3>
+          <p class="mb-4 opacity-75">Pilih layanan magang atau penelitian yang sesuai dengan kebutuhan akademik Anda dan jadilah bagian dari transformasi digital Kota Bogor.</p>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="btn-light">
+            Pilih Layanan Sekarang
+          </button>
+        </div>
+        <!-- Decorative Background Elements -->
+        <div class="cta-decor-1"></div>
+        <div class="cta-decor-2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Brand -->
+        <div class="col-lg-4">
+          <div class="footer-brand mb-3">
+            <img src="images/kominfo.jpg" alt="Logo">
+            <strong>Diskominfo Kota Bogor</strong>
+          </div>
+          <p class="footer-desc">Membangun ekosistem digital yang inovatif dan transparan untuk pelayanan publik Kota Bogor yang lebih baik.</p>
+        </div>
+
+        <!-- Navigasi -->
+        <div class="col-md-2">
+          <p class="footer-heading">Navigasi</p>
+          <div class="footer-links">
+            <a href="../user/index.php">Beranda</a>
+            <a href="../user/sejarah.php">Sejarah</a>
+            <a href="../user/visi-misi.php">Visi &amp; Misi</a>
+            <a href="../user/berita.php">Berita</a>
+          </div>
+        </div>
+
+        <!-- Layanan -->
+        <div class="col-md-2">
+          <p class="footer-heading">Layanan</p>
+          <div class="footer-links">
+            <a href="https://ppid.kotabogor.go.id" target="_blank">PPID</a>
+            <a href="https://smartcity.kotabogor.go.id" target="_blank">Smart City</a>
+          </div>
+        </div>
+
+        <!-- Kontak -->
+        <div class="col-lg-4">
+          <p class="footer-heading">Kontak</p>
+          <div class="footer-contact">
+            <div class="footer-contact-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Jl. Ir. H. Juanda No.10, Kota Bogor, Jawa Barat</span>
+            </div>
+            <div class="footer-contact-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>kominfo@kotabogor.go.id</span>
+            </div>
+            <div class="footer-contact-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12.7 19.79 19.79 0 0 1 1.62 4.07 2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>(0251) 8321075</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        &copy; <span id="year"></span> Diskominfo Kota Bogor. Hak Cipta Dilindungi.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════ SCRIPTS ═══════════ -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS animations
+    AOS.init({ once: true, duration: 800, offset: 100, easing: 'ease-out-quart' });
+
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+
+    // Mobile Navbar Toggle
+    const navbarToggler = document.getElementById('navbarToggler');
+    const navbarMenu = document.getElementById('navbarMenu');
+    
+    navbarToggler.addEventListener('click', () => {
+      navbarMenu.classList.toggle('open');
+    });
+
+    // Toggle dropdowns on click (mimicking Bootstrap)
+    document.querySelectorAll('.nav-item.dropdown').forEach(dropdown => {
+      const toggle = dropdown.querySelector('.nav-link');
+      const menu = dropdown.querySelector('.dropdown-menu');
+      
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isOpen = menu.classList.contains('show');
+        
+        // Close all other dropdowns
+        document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+        document.querySelectorAll('.nav-item.dropdown').forEach(d => d.classList.remove('open'));
+        
+        if (!isOpen) {
+          menu.classList.add('show');
+          dropdown.classList.add('open');
+        }
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+      document.querySelectorAll('.nav-item.dropdown').forEach(d => d.classList.remove('open'));
+    });
+
+    // Custom Vanilla Accordion FAQ
+    document.querySelectorAll('.accordion-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const targetCollapse = document.getElementById(targetId);
+        const isCollapsed = button.classList.contains('collapsed');
+        
+        // Close all accordion items
+        document.querySelectorAll('.accordion-button').forEach(btn => {
+          btn.classList.add('collapsed');
+        });
+        document.querySelectorAll('.accordion-collapse').forEach(collapse => {
+          collapse.classList.remove('show');
+          collapse.style.maxHeight = null;
+        });
+
+        if (isCollapsed) {
+          button.classList.remove('collapsed');
+          targetCollapse.classList.add('show');
+          targetCollapse.style.maxHeight = targetCollapse.scrollHeight + "px";
+        }
+      });
+    });
+
+
+  </script>
+</body>
+</html>

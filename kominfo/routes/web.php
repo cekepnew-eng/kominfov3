@@ -5,7 +5,7 @@ use App\Http\Controllers\LayananPublikController;
 
 Route::get('/', function () {
     return view('layanan.landing-page');
-})->name('home');
+})->name('landing');
 
 Route::prefix('layanan-publik')->group(function () {
     Route::get('/penelitian', [LayananPublikController::class, 'penelitian'])->name('layanan.penelitian');
@@ -30,4 +30,13 @@ Route::prefix('layanan-publik')->group(function () {
     // Route untuk Survei Kepuasan Masyarakat
     Route::get('/survei', [LayananPublikController::class, 'surveiView'])->name('layanan.survei');
     Route::post('/survei', [LayananPublikController::class, 'storeSurvei'])->name('layanan.survei.store');
+    // Route untuk Portal Layanan Diskominfo
+    Route::get('/kominfo', function () {
+        return view('layanan.kominfo-page');
+    })->name('layanan.kominfo');
+
+    // Route untuk Form Pengajuan Generik
+    Route::get('/form', function () {
+        return view('layanan.form-pengajuan');
+    })->name('layanan.form');
 });

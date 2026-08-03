@@ -42,6 +42,7 @@
             Layanan Publik
           </a>
           <ul class="dropdown-menu">
+            <li><a class="dropdown-item {{ request()->routeIs('layanan.kominfo') ? 'active' : '' }}" href="{{ route('layanan.kominfo') }}">Portal Layanan Diskominfo</a></li>
             <li><a class="dropdown-item {{ request()->routeIs('layanan.penelitian') || request()->routeIs('layanan.penelitian.submit') ? 'active' : '' }}" href="{{ route('layanan.penelitian') }}">Penelitian</a></li>
             <li><a class="dropdown-item {{ request()->routeIs('layanan.jurnal') ? 'active' : '' }}" href="{{ route('layanan.jurnal') }}">Daftar Jurnal</a></li>
             <li><a class="dropdown-item {{ request()->routeIs('layanan.magang') ? 'active' : '' }}" href="{{ route('layanan.magang') }}">Magang &amp; PKL</a></li>
